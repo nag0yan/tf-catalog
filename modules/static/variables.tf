@@ -4,13 +4,13 @@ variable "service" {
 }
 
 variable "account_id" {
-  description = "The AWS account ID."
+  description = "The AWS account ID.(Optional)"
   type        = string
   default     = null
 }
 
 variable "region" {
-  description = "The AWS region."
+  description = "The AWS region.(Optional)"
   type        = string
   default     = null
 }
