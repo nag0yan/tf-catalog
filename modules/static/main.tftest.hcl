@@ -56,4 +56,12 @@ run "check_standard_use" {
     condition     = aws_cloudfront_distribution.main.enabled == true
     error_message = "The CloudFront distribution should be enabled."
   }
+  assert {
+    condition     = aws_cloudfront_distribution.main.default_cache_behavior[0].cache_policy_id == "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    error_message = "The CloudFront distribution should use the Managed-CachingOptimized cache policy."
+  }
+  assert {
+    condition     = aws_cloudfront_distribution.main.default_cache_behavior[0].viewer_protocol_policy == "redirect-to-https"
+    error_message = "The CloudFront distribution should redirect HTTP to HTTPS."
+  }
 }
