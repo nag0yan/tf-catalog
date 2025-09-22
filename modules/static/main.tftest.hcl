@@ -2,7 +2,7 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
-run "check_standard_use" {
+run "standard_use" {
   command = plan
 
   variables {
@@ -63,5 +63,18 @@ run "check_standard_use" {
   assert {
     condition     = aws_cloudfront_distribution.main.default_cache_behavior[0].viewer_protocol_policy == "redirect-to-https"
     error_message = "The CloudFront distribution should redirect HTTP to HTTPS."
+  }
+}
+
+run "non_optional_inputs" {
+  command = plan
+  variables {
+    service = "test-service"
+  }
+
+  # S3 Bucket
+  assert {
+    condition     = can(regex("^test-service-[0-9]{12}-ap-northeast-1$", aws_s3_bucket.main.bucket))
+    error_message = "The bucket name is incorrect."
   }
 }
