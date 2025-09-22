@@ -1,0 +1,3 @@
+[tools]
+checkov = "3.2.471"
+terraform = "1.13"
