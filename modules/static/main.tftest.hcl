@@ -78,3 +78,13 @@ run "non_optional_inputs" {
     error_message = "The bucket name is incorrect."
   }
 }
+
+run "invalid_region" {
+  command = plan
+
+  variables {
+    service = "test-service"
+    region  = "a"
+  }
+  expect_failures = [ var.region ]
+}
