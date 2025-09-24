@@ -13,4 +13,8 @@ variable "region" {
   description = "The AWS region.(Optional)"
   type        = string
   default     = null
+  validation {
+    condition = var.region == null || contains(local.allowed_region, var.region)
+    error_message = "The specified region is not supported. Supported regions are: ${join(", ", local.allowed_region)}"
+  }
 }
